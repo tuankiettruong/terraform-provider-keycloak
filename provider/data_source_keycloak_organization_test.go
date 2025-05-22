@@ -10,7 +10,8 @@ import (
 
 func TestAccKeycloakDataSourceOrganization_basic(t *testing.T) {
 	t.Parallel()
-	clientId := acctest.RandomWithPrefix("tf-acc-test")
+	orgName := acctest.RandomWithPrefix("tf-acc-test")
+	domainName := acctest.RandomWithPrefix("tf-acc-test")
 	dataSourceName := "data.keycloak_organization.test"
 	resourceName := "keycloak_organization.test"
 
@@ -19,7 +20,7 @@ func TestAccKeycloakDataSourceOrganization_basic(t *testing.T) {
 		ProviderFactories: testAccProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccKeycloakOrganizationConfig(clientId),
+				Config: testAccKeycloakOrganizationConfig(orgName, domainName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "id", resourceName, "id"),
 					resource.TestCheckResourceAttrPair(dataSourceName, "realm", resourceName, "realm"),
@@ -35,7 +36,7 @@ func TestAccKeycloakDataSourceOrganization_basic(t *testing.T) {
 	})
 }
 
-func testAccKeycloakOrganizationConfig(orgName string) string {
+func testAccKeycloakOrganizationConfig(orgName, domainName string) string {
 	return fmt.Sprintf(`
 data "keycloak_realm" "realm" {
 	realm = "%s"
@@ -44,12 +45,12 @@ data "keycloak_realm" "realm" {
 resource "keycloak_organization" "test" {
 	name		 = "%s"
 	alias		 = "%s"
-	realm        = data.keycloak_realm.realm.name
+	realm        = data.keycloak_realm.realm.id
 	enabled      = true
 	description  = "a test organization"
 	redirect_url = "http://localhost:5555"
 	domain {
-		name 	 = "example.com"
+		name 	 = "%s"
 		verified = true
 	}
 	attributes = {
@@ -65,5 +66,5 @@ data "keycloak_organization" "test" {
 		keycloak_organization.test,
 	]
 }
-`, testAccRealm.Realm, orgName, orgName)
+`, testAccRealm.Realm, orgName, orgName, domainName)
 }

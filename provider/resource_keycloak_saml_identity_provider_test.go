@@ -120,7 +120,7 @@ func TestAccKeycloakSamlIdentityProvider_linkOrganization(t *testing.T) {
 	t.Parallel()
 
 	samlName := acctest.RandomWithPrefix("tf-acc")
-	organizatioName := acctest.RandomWithPrefix("tf-acc")
+	organizationName := acctest.RandomWithPrefix("tf-acc")
 
 	resource.Test(t, resource.TestCase{
 		ProviderFactories: testAccProviderFactories,
@@ -128,7 +128,7 @@ func TestAccKeycloakSamlIdentityProvider_linkOrganization(t *testing.T) {
 		CheckDestroy:      testAccCheckKeycloakSamlIdentityProviderDestroy(),
 		Steps: []resource.TestStep{
 			{
-				Config: testKeycloakSamlIdentityProvider_linkOrganization(samlName, organizatioName),
+				Config: testKeycloakSamlIdentityProvider_linkOrganization(samlName, organizationName),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckKeycloakSamlIdentityProviderExists("keycloak_saml_identity_provider.saml"),
 					testAccCheckKeycloakSamlIdentityProviderLinkOrganization("keycloak_saml_identity_provider.saml"),
@@ -322,7 +322,7 @@ func testAccCheckKeycloakSamlIdentityProviderLinkOrganization(resourceName strin
 			return err
 		}
 
-		if fetchedSaml.OrganizationId != "" {
+		if fetchedSaml.OrganizationId == "" {
 			return fmt.Errorf("expected saml provider to be linked with an organization, but it was not")
 		}
 

@@ -136,7 +136,7 @@ func TestAccKeycloakOidcIdentityProvider_linkOrganization(t *testing.T) {
 	t.Parallel()
 
 	oidcName := acctest.RandomWithPrefix("tf-acc")
-	organizatioName := acctest.RandomWithPrefix("tf-acc")
+	organizationName := acctest.RandomWithPrefix("tf-acc")
 
 	resource.Test(t, resource.TestCase{
 		ProviderFactories: testAccProviderFactories,
@@ -144,7 +144,7 @@ func TestAccKeycloakOidcIdentityProvider_linkOrganization(t *testing.T) {
 		CheckDestroy:      testAccCheckKeycloakOidcIdentityProviderDestroy(),
 		Steps: []resource.TestStep{
 			{
-				Config: testKeycloakOidcIdentityProvider_linkOrganization(oidcName, organizatioName),
+				Config: testKeycloakOidcIdentityProvider_linkOrganization(oidcName, organizationName),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckKeycloakOidcIdentityProviderExists("keycloak_oidc_identity_provider.oidc"),
 					testAccCheckKeycloakOidcIdentityProviderLinkOrganization("keycloak_oidc_identity_provider.oidc"),
@@ -301,7 +301,7 @@ func testAccCheckKeycloakOidcIdentityProviderLinkOrganization(resourceName strin
 			return err
 		}
 
-		if fetchedOidc.OrganizationId != "" {
+		if fetchedOidc.OrganizationId == "" {
 			return fmt.Errorf("expected oidc provider to be linked with an organization, but it was not")
 		}
 
