@@ -215,7 +215,7 @@ func testAccCheckKeycloakOrganizationHasDomains(resourceName, domainName string)
 		}
 
 		if len(organization.Domains) < 2 || (organization.Domains[0].Name != domainName && organization.Domains[1].Name != domainName) {
-			return fmt.Errorf("expected organization %s to have domain %s with domainName %s", organization.Name, domainName)
+			return fmt.Errorf("expected organization %s to have domain with domainName %s", organization.Name, domainName)
 		}
 
 		return nil
