@@ -108,7 +108,7 @@ func createTestRealm(testCtx context.Context) *keycloak.Realm {
 
 	var err error
 
-	validVersion, err := keycloakClient.VersionIsLessThan(testCtx, keycloak.Version_26)
+	validVersion, err := keycloakClient.VersionIsGreaterThanOrEqualTo(testCtx, keycloak.Version_26)
 	if err != nil {
 		log.Printf("Unable to check keycloak version: %s", err)
 	}
