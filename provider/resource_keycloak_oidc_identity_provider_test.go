@@ -132,6 +132,7 @@ func TestAccKeycloakOidcIdentityProvider_keyDefaultScopes(t *testing.T) {
 }
 
 func TestAccKeycloakOidcIdentityProvider_linkOrganization(t *testing.T) {
+	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
 	t.Parallel()
 
 	oidcName := acctest.RandomWithPrefix("tf-acc")
@@ -432,7 +433,7 @@ data "keycloak_realm" "realm" {
 }
 
 resource "keycloak_organization" "org" {
-	realm   = data.keycloak_realm.realm.name
+	realm   = data.keycloak_realm.realm.id
 	name    = "%s"
 	enabled = true
 

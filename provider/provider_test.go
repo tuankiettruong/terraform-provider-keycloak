@@ -4,14 +4,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
-	"github.com/keycloak/terraform-provider-keycloak/keycloak"
 	"log"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/meta"
+	"github.com/keycloak/terraform-provider-keycloak/keycloak"
 )
 
 var testAccProviderFactories map[string]func() (*schema.Provider, error)
@@ -99,9 +100,10 @@ func TestMain(m *testing.M) {
 func createTestRealm(testCtx context.Context) *keycloak.Realm {
 	name := acctest.RandomWithPrefix("tf-acc")
 	r := &keycloak.Realm{
-		Id:      name,
-		Realm:   name,
-		Enabled: true,
+		Id:                   name,
+		Realm:                name,
+		Enabled:              true,
+		OrganizationsEnabled: true,
 	}
 
 	var err error
