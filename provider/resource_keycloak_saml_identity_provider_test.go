@@ -116,7 +116,7 @@ func TestAccKeycloakSamlIdentityProvider_extraConfigInvalid(t *testing.T) {
 }
 
 func TestAccKeycloakSamlIdentityProvider_linkOrganization(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	t.Parallel()
 
 	samlName := acctest.RandomWithPrefix("tf-acc")

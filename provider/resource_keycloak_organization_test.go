@@ -12,7 +12,7 @@ import (
 )
 
 func TestAccKeycloakOrganization_basic(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	organizationName := acctest.RandomWithPrefix("tf-acc")
 
 	resource.Test(t, resource.TestCase{
@@ -29,7 +29,7 @@ func TestAccKeycloakOrganization_basic(t *testing.T) {
 }
 
 func TestAccKeycloakOrganization_basicUpdate(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	organizationName := acctest.RandomWithPrefix("tf-acc")
 	firstEnabled := randomBool()
 	domainOne := acctest.RandomWithPrefix("tf-acc")
@@ -87,7 +87,7 @@ func TestAccKeycloakOrganization_basicUpdate(t *testing.T) {
 }
 
 func TestAccKeycloakOrganization_createAfterManualDestroy(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	var organization = &keycloak.Organization{}
 
 	organizationName := acctest.RandomWithPrefix("tf-acc")
@@ -119,7 +119,7 @@ func TestAccKeycloakOrganization_createAfterManualDestroy(t *testing.T) {
 }
 
 func TestAccKeycloakOrganization_basicWithMultipleDomains(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	organizationName := acctest.RandomWithPrefix("tf-acc")
 	extraDomain := acctest.RandomWithPrefix("tf-acc")
 
@@ -140,7 +140,7 @@ func TestAccKeycloakOrganization_basicWithMultipleDomains(t *testing.T) {
 }
 
 func TestAccKeycloakOrganization_basicWithAttributes(t *testing.T) {
-	skipIfVersionIsLessThanOrEqualTo(testCtx, t, keycloakClient, keycloak.Version_26)
+	skipIfVersionIsLessThan(testCtx, t, keycloakClient, keycloak.Version_26)
 	organizationName := acctest.RandomWithPrefix("tf-acc")
 	attributeName := acctest.RandomWithPrefix("tf-acc")
 	attributeValue := acctest.RandomWithPrefix("tf-acc")
