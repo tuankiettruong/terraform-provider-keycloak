@@ -40,7 +40,7 @@ func TestAccKeycloakOrganization_basicUpdate(t *testing.T) {
 		Name:        organizationName,
 		Alias:       organizationName,
 		Enabled:     firstEnabled,
-		Description: acctest.RandString(10),
+		Description: acctest.RandomWithPrefix("tf-acc"),
 		RedirectUrl: "https://example.com",
 		Domains: []keycloak.OrganizationDomain{
 			{
@@ -55,7 +55,7 @@ func TestAccKeycloakOrganization_basicUpdate(t *testing.T) {
 		Name:        organizationName,
 		Alias:       organizationName,
 		Enabled:     !firstEnabled,
-		Description: acctest.RandString(10),
+		Description: acctest.RandomWithPrefix("tf-acc"),
 		RedirectUrl: "https://example.org",
 		Domains: []keycloak.OrganizationDomain{
 			{
