@@ -24,7 +24,10 @@ func dataSourceKeycloakOrgnization() *schema.Resource {
 			},
 			"alias": {
 				Type:     schema.TypeString,
-				Optional: true,
+				Computed: true,
+			},
+			"description": {
+				Type:     schema.TypeString,
 				Computed: true,
 			},
 			"enabled": {
