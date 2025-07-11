@@ -170,7 +170,7 @@ func KeycloakProvider(client *keycloak.KeycloakClient) *schema.Provider {
 				Type:        schema.TypeString,
 				Description: "The PEM-formatted private key used to sign the JWT when client-jwt is used.",
 				Sensitive:   true,
-				Default:     "",
+				DefaultFunc: schema.EnvDefaultFunc("KEYCLOAK_JWT_SIGNING_KEY", nil),
 			},
 			"realm": {
 				Optional:    true,
