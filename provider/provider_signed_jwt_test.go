@@ -15,7 +15,6 @@ func TestAccKeycloakProvider_signedJWT(t *testing.T) {
 	testAccProvider = KeycloakProvider(keycloakClient)
 
 	os.Setenv("KEYCLOAK_CLIENT_ID", "terraform-jwt")
-	os.Setenv("KEYCLOAK_CLIENT_SECRET", "")
 	os.Setenv("KEYCLOAK_JWT_SIGNING_KEY", jwtSigningKey)
 
 	clientId := acctest.RandomWithPrefix("tf-acc")
