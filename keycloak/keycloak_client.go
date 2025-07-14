@@ -294,8 +294,6 @@ func (keycloakClient *KeycloakClient) getAuthenticationFormData(kc_url string) (
 		}
 
 	} else if keycloakClient.clientCredentials.GrantType == "client_credentials" {
-		authenticationFormData.Set("client_secret", keycloakClient.clientCredentials.ClientSecret)
-
 		if keycloakClient.clientCredentials.ClientAssertion != "" {
 			authenticationFormData.Set("client_assertion_type", keycloakClient.clientCredentials.ClientAssertionType)
 			authenticationFormData.Set("client_assertion", keycloakClient.clientCredentials.ClientAssertion)
@@ -311,6 +309,8 @@ func (keycloakClient *KeycloakClient) getAuthenticationFormData(kc_url string) (
 			}
 			authenticationFormData.Set("client_assertion_type", keycloakClient.clientCredentials.ClientAssertionType)
 			authenticationFormData.Set("client_assertion", signedJWT)
+		} else {
+			authenticationFormData.Set("client_secret", keycloakClient.clientCredentials.ClientSecret)
 		}
 
 	}
